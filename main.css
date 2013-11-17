@@ -1,0 +1,10 @@
+
+#mainTable td {
+	padding: 0px;
+}
+#mainTable input[type="checkbox"] {
+	margin: 0px;
+}
+form {
+	margin-bottom: 0em;
+}

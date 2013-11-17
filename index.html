@@ -1,0 +1,18 @@
+<html>
+<head>
+  <title>LED Matrix</title>
+  <script type="text/javascript" src="http://localhost:8077/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body onload="init()">
+
+  <table id='mainTable'></table>
+  <form action='javascript:setFormSubmit()'>
+    <button onclick='clearButtonPressed()'>clear</button>
+    <input type='text' id='setForm' placeholder='0000000000000000'>
+    <input type='submit' value='set'>
+  </form>
+  <div id='message'></div>
+</body>
+</html>
