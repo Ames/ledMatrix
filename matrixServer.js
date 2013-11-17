@@ -1,5 +1,4 @@
 
-var SerialPort  = require('serialport').SerialPort;
 var io = require('socket.io').listen(8077);
 
 
@@ -14,22 +13,6 @@ if(!storage.getItem('state')){
 	storage.setItem('state','0000000000000000');
 }
 
-// //SERIAL
-var portName = '/dev/tty.usbmodem411';
-var serialPort = new SerialPort(portName); // instantiate the serial port.
-
-
-
-serialPort.on('open',function(){
-	setDeviceState(storage.getItem('state'));
-});
-
-
-function setDeviceState(state){
-	// check connection?
-	serialPort.write('$'+state+'\r');
-}
-
 
 //SERVER
 io.sockets.on('connection', function (socket) {
@@ -42,8 +25,11 @@ io.sockets.on('connection', function (socket) {
 	socket.on('state', function (state) {
 		console.log('state',state);
 		//if(serialPort.)
-		setDeviceState(state);
+		//setDeviceState(state);
 		storage.setItem('state',state);
+
+		socket.broadcast.emit('state', state);
+
 	});
 
 	socket.on('message', function (msg) {
