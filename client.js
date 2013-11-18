@@ -5,7 +5,9 @@ var SerialPort  = require('serialport').SerialPort;
 
 
 
-var portName = '/dev/tty.usbmodem411';
+//var portName = '/dev/tty.usbmodem411';
+var portName = '/dev/serial/by-id/usb-Dean_Camera_LUFA_CDC_Demo_74035323138351819051-if00';
+
 var serialPort = new SerialPort(portName); // instantiate the serial port.
 
 
@@ -25,7 +27,7 @@ function setDeviceState(state){
 }
 
 
-socket = io.connect('localhost', {
+socket = io.connect('192.168.33.111', {
     port: 8077
 });
 
