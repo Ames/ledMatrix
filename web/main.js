@@ -41,11 +41,16 @@ function init(){
 
 function clearButtonPressed(){
 	setState('0000000000000000');
+	socket.emit('state',state);
 }
 
 function setFormSubmit(){
-	setState(setForm.value);
-	//setForm.value=getState();
+	// handle change pseudo-async to maybe help responsiveness
+	//setTimeout(function(){
+		setState(setForm.value);
+		//setForm.value=getState();
+		socket.emit('state',state);
+	//},10);
 }
 
 function generateTable(){
@@ -114,5 +119,5 @@ function setState(state){
 	}
 
 	setForm.value=state;
-	socket.emit('state',state);
+	//socket.emit('state',state);
 }
