@@ -11,7 +11,8 @@ function setMessage(msg){
 }
 
 
-var socket = io.connect('http://localhost:8077');
+//var socket = io.connect('http://192.168.33.111:8077');
+var socket = io.connect();
 socket.on('connect', function () {
 	socket.send('hi');
 
@@ -23,7 +24,7 @@ socket.on('connect', function () {
 	socket.on('disconnect',function(){
 		setMessage('disconnected');
 	});
-	
+
 	socket.on('state',function(newState){
 		setState(newState);
 	});
@@ -101,6 +102,9 @@ function getState(){
 
 function setState(state){
 	// set the checkboxes to state stored in state
+
+	if(state==getState())
+		return;
 
 	for(var row=0;row<8;row++){
 		var rowVal = parseInt(state.substr(row*2,2),16);

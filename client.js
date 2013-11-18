@@ -14,6 +14,10 @@ serialPort.on('open',function(){
 	//setDeviceState(storage.getItem('state'));
 });
 
+serialPort.on('data',function(data){
+	console.log(data.toString());
+});
+
 
 function setDeviceState(state){
 	// check connection?
