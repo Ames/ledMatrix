@@ -40,17 +40,12 @@ function init(){
 }
 
 function clearButtonPressed(){
-	setState('0000000000000000');
-	socket.emit('state',state);
+	sendState(setState('0000000000000000'));
 }
 
 function setFormSubmit(){
-	// handle change pseudo-async to maybe help responsiveness
-	//setTimeout(function(){
-		setState(setForm.value);
-		//setForm.value=getState();
-		socket.emit('state',state);
-	//},10);
+	setState(setForm.value);
+	sendState(getState());
 }
 
 function generateTable(){
@@ -86,8 +81,7 @@ function stateChanged(){
 	var state = getState();
 	setForm.value=state;
 
-	socket.emit('state',state);
-	//console.log(getState());
+	sendState(state);
 }
 
 function getState(){
@@ -119,5 +113,9 @@ function setState(state){
 	}
 
 	setForm.value=state;
-	//socket.emit('state',state);
+	return state;
+}
+
+function sendState(state){
+	socket.emit('state',state);
 }
