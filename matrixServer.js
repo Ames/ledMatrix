@@ -1,28 +1,25 @@
 
-var app = require('express')()
-  , server = require('http').createServer(app)
-  , io = require('socket.io').listen(server);
+var express = require("express");
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+
+app.use(express.logger());
 
 
-server.listen(8077);
+var port = process.env.PORT || 8077;
+server.listen(port);
 
 
-//var io = require('socket.io').listen(8077);
-
-
-//var state = '0000000000000000';
-
-
+// init persist
 var storage = require('node-persist');
-
 storage.initSync({interval:10*1000});
-
 if(!storage.getItem('state')){
 	storage.setItem('state','0000000000000000');
 }
 
 
-
+// static routes
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/web/index.html');
 });
@@ -35,22 +32,17 @@ app.get('/main.css', function (req, res) {
 
 
 
-//SERVER
+// socket server
 io.sockets.on('connection', function (socket) {
 
 	console.log('connected');
 
+	// send the current state to the new client
 	socket.emit('state',storage.getItem('state'));
 
-
 	socket.on('state', function (state) {
-		console.log('state',state);
-		//if(serialPort.)
-		//setDeviceState(state);
-		storage.setItem('state',state);
-
 		socket.broadcast.emit('state', state);
-
+		storage.setItem('state',state);
 	});
 
 	socket.on('message', function (msg) {
