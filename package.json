@@ -5,7 +5,7 @@
     "express": "3.1.x",
     "socket.io": "0.9.16",
     "node-persist": "0.0.1",
-    "node-static": "0.7.2",
+    "node-static": "0.7.2"
   },
   "engines": {
     "node": "0.10.x",
