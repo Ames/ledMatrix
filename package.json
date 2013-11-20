@@ -6,8 +6,6 @@
     "socket.io": "0.9.16",
     "node-persist": "0.0.1",
     "node-static": "0.7.2",
-    "socket.io-client": "0.9.16",
-    "serialport": "1.2.5"
   },
   "engines": {
     "node": "0.10.x",
