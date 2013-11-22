@@ -21,13 +21,13 @@ if(!storage.getItem('state')){
 
 // static routes
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/web/index.html');
+	res.sendfile(__dirname + '/web/index.html');
 });
 app.get('/main.js', function (req, res) {
-  res.sendfile(__dirname + '/web/main.js');
+	res.sendfile(__dirname + '/web/main.js');
 });
 app.get('/main.css', function (req, res) {
-  res.sendfile(__dirname + '/web/main.css');
+	res.sendfile(__dirname + '/web/main.css');
 });
 
 
@@ -38,8 +38,9 @@ app.get('/main.css', function (req, res) {
 // so we have to setup polling instead.
 // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
 io.configure(function () {
-  io.set("transports", ["xhr-polling"]);
-  io.set("polling duration", 10);
+	io.set('log level', 1); // reduce logging
+	io.set("transports", ["xhr-polling"]);
+	io.set("polling duration", 10);
 });
 
 io.sockets.on('connection', function (socket) {
